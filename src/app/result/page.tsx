@@ -105,8 +105,8 @@ export default function ResultPage() {
 
   return (
     <SitePage>
-      <div className="mx-auto grid w-full max-w-5xl gap-6 pb-12 lg:grid-cols-[1fr_0.78fr]">
-        <Panel className="print-panel">
+      <div className="mx-auto grid w-full max-w-5xl gap-6 px-4 pb-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.78fr)] lg:px-8">
+        <Panel className="min-w-0 print-panel">
           <SectionLabel>Kết quả của anh/chị</SectionLabel>
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -150,11 +150,11 @@ export default function ResultPage() {
           </div>
         </Panel>
 
-        <aside className="space-y-6">
-          <Panel className="print-panel">
+        <aside className="min-w-0 space-y-6">
+          <Panel className="min-w-0 print-panel">
             <SectionLabel>Nội bộ tư vấn</SectionLabel>
             <h2 className="text-2xl font-bold text-leaf-900">Advisor review</h2>
-            <p className="mt-3 leading-7 text-leaf-700">{report.generatedSummary}</p>
+            <p className="mt-3 break-words leading-7 text-leaf-700 [overflow-wrap:anywhere]">{report.generatedSummary}</p>
             <div className="mt-5 grid gap-3">
               <ReviewBlock title="Gợi ý mở đầu" body="Cảm ơn anh/chị đã hoàn thành bài kiểm tra. Mình có thể cùng nhìn nhanh 2-3 điểm đang ảnh hưởng nhiều nhất đến độ an toàn tài chính của gia đình." />
               <ReviewBlock title="Câu hỏi nên đào sâu" body={`Ưu tiên hỏi thêm về ${report.weakestDimensions.map((item) => item.dimension.toLowerCase()).join(", ")} để hiểu nguyên nhân, mức độ cấp thiết và khả năng hành động trong 30-90 ngày tới.`} />
@@ -162,34 +162,34 @@ export default function ResultPage() {
             </div>
           </Panel>
 
-          <Panel className="print-panel">
+          <Panel className="min-w-0 print-panel">
             <h2 className="text-xl font-bold text-leaf-900">Điểm theo từng nhóm</h2>
             <div className="mt-4 space-y-3">
               {report.perQuestionScore.map((item) => (
-                <div key={item.questionId} className="rounded-[8px] border border-leaf-100 bg-white p-3">
+                <div key={item.questionId} className="min-w-0 rounded-[8px] border border-leaf-100 bg-white p-3">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-semibold text-leaf-900">{item.dimension}</p>
+                    <p className="min-w-0 break-words text-sm font-semibold text-leaf-900">{item.dimension}</p>
                     <span className="rounded-full bg-leaf-50 px-3 py-1 text-sm font-bold text-leaf-700">
                       {item.score}/5
                     </span>
                   </div>
-                  <p className="mt-2 text-sm leading-6 text-leaf-700">{item.answer}</p>
+                  <p className="mt-2 break-words text-sm leading-6 text-leaf-700">{item.answer}</p>
                 </div>
               ))}
             </div>
           </Panel>
 
-          <Panel className="print-panel">
+          <Panel className="min-w-0 print-panel">
             <h2 className="text-xl font-bold text-leaf-900">Dữ liệu xuất nội bộ</h2>
             <p className="mt-2 text-sm leading-6 text-leaf-700">
               Dùng nút Xuất JSON để lưu cấu trúc này cho Google Sheets, CRM, email hoặc PDF sau này.
             </p>
-            <pre className="mt-4 max-h-80 overflow-auto rounded-[8px] bg-leaf-900 p-4 text-xs leading-5 text-leaf-50">
+            <pre className="mt-4 max-h-80 max-w-full overflow-auto whitespace-pre-wrap break-words rounded-[8px] bg-leaf-900 p-4 text-xs leading-5 text-leaf-50 [overflow-wrap:anywhere]">
               {resultJson}
             </pre>
           </Panel>
 
-          <div className="no-print rounded-[8px] border border-leaf-100 bg-white/70 p-5">
+          <div className="no-print min-w-0 rounded-[8px] border border-leaf-100 bg-white/70 p-5">
             <Link href="/survey" className="font-semibold text-leaf-800 underline decoration-leaf-300 underline-offset-4">
               Làm lại bài kiểm tra
             </Link>
@@ -309,9 +309,9 @@ function LeadCaptureForm({
 
 function ReviewBlock({ title, body }: { title: string; body: string }) {
   return (
-    <div className="rounded-[8px] border border-leaf-100 bg-leaf-50 p-4">
+    <div className="min-w-0 rounded-[8px] border border-leaf-100 bg-leaf-50 p-4">
       <p className="text-sm font-bold text-leaf-900">{title}</p>
-      <p className="mt-1 text-sm leading-6 text-leaf-700">{body}</p>
+      <p className="mt-1 break-words text-sm leading-6 text-leaf-700 [overflow-wrap:anywhere]">{body}</p>
     </div>
   );
 }
@@ -322,7 +322,7 @@ function ResultList({ title, items }: { title: string; items: string[] }) {
       <h2 className="text-xl font-bold text-leaf-900">{title}</h2>
       <div className="mt-3 grid gap-3">
         {items.map((item) => (
-          <div key={item} className="rounded-[8px] border border-leaf-100 bg-white p-4 leading-7 text-leaf-800">
+          <div key={item} className="min-w-0 break-words rounded-[8px] border border-leaf-100 bg-white p-4 leading-7 text-leaf-800">
             {item}
           </div>
         ))}
