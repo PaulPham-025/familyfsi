@@ -1,4 +1,5 @@
-import { LinkButton, Panel, SectionLabel } from "@/components/Ui";
+import Link from "next/link";
+import { Panel, SectionLabel } from "@/components/Ui";
 import { brand } from "@/lib/site-content";
 
 export function ContactCta() {
@@ -13,12 +14,18 @@ export function ContactCta() {
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <LinkButton href="/survey" className="bg-white text-leaf-800 hover:bg-leaf-50">
+            <Link
+              href="/survey"
+              className="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-bold text-leaf-800 transition hover:bg-leaf-50"
+            >
               Làm FSI
-            </LinkButton>
-            <LinkButton href={brand.bookingUrl} variant="secondary" className="border-white bg-transparent text-white hover:bg-white/10">
+            </Link>
+            <Link
+              href={brand.bookingUrl}
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-white px-5 py-2.5 text-sm font-bold text-white transition hover:bg-white/10"
+            >
               {brand.bookingLabel}
-            </LinkButton>
+            </Link>
           </div>
         </div>
       </div>
