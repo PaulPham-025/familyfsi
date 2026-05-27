@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Family Financial Safety Index</title>
+    <style>
+      :root {
+        --leaf-900: #17362a;
+        --leaf-800: #1f4e37;
+        --leaf-700: #226141;
+        --leaf-600: #27794f;
+        --leaf-100: #dff3e6;
+        --leaf-50: #f3faf5;
+        --warm-50: #fffaf2;
+        --warm-100: #f7edda;
+        --border: #d8e6dc;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at top left, rgba(191, 230, 207, 0.55), transparent 34rem),
+          linear-gradient(180deg, #fffaf2 0%, #f6fbf7 48%, #ffffff 100%);
+        color: var(--leaf-900);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      main {
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .wrap {
+        width: min(100%, 980px);
+        margin: 0 auto;
+      }
+
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 28px;
+        flex-wrap: wrap;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+      }
+
+      .logo {
+        display: grid;
+        width: 40px;
+        height: 40px;
+        place-items: center;
+        border-radius: 999px;
+        background: var(--leaf-700);
+        color: white;
+      }
+
+      .pill {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.75);
+        padding: 10px 16px;
+        color: var(--leaf-700);
+        font-size: 14px;
+      }
+
+      .nav {
+        display: flex;
+        max-width: 100%;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .nav button {
+        width: auto;
+        min-height: 38px;
+        flex: 0 0 auto;
+        border: 0;
+        background: transparent;
+        color: var(--leaf-800);
+        padding: 8px 12px;
+      }
+
+      .nav button:hover {
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 32px;
+        align-items: center;
+        padding: 28px 0 44px;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--leaf-600);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(40px, 7vw, 64px);
+        line-height: 1.05;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 26px;
+      }
+
+      p {
+        line-height: 1.7;
+      }
+
+      .lead {
+        max-width: 680px;
+        color: var(--leaf-800);
+        font-size: 18px;
+      }
+
+      .panel,
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: 0 18px 60px rgba(31, 78, 55, 0.1);
+      }
+
+      .panel {
+        padding: 28px;
+      }
+
+      .benefit {
+        display: flex;
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .num {
+        display: grid;
+        flex: 0 0 28px;
+        width: 28px;
+        height: 28px;
+        place-items: center;
+        border-radius: 999px;
+        background: var(--leaf-100);
+        color: var(--leaf-700);
+        font-weight: 800;
+      }
+
+      button,
+      .button {
+        min-height: 44px;
+        border: 0;
+        border-radius: 999px;
+        padding: 12px 20px;
+        background: var(--leaf-700);
+        color: white;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      button.secondary {
+        border: 1px solid var(--border);
+        background: white;
+        color: var(--leaf-800);
+      }
+
+      button:disabled {
+        cursor: not-allowed;
+        opacity: 0.45;
+      }
+
+      .trust {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .card {
+        padding: 18px;
+        box-shadow: none;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .progress {
+        height: 8px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: var(--leaf-100);
+      }
+
+      .bar {
+        height: 100%;
+        width: 0%;
+        border-radius: 999px;
+        background: var(--leaf-600);
+        transition: width 180ms ease;
+      }
+
+      .survey {
+        width: min(100%, 760px);
+        margin: 0 auto;
+      }
+
+      .field-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      label span {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      select {
+        width: 100%;
+        height: 48px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: white;
+        color: var(--leaf-900);
+        padding: 0 12px;
+      }
+
+      input[type="text"],
+      input[type="tel"] {
+        width: 100%;
+        height: 48px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: white;
+        color: var(--leaf-900);
+        padding: 0 12px;
+      }
+
+      .option {
+        width: 100%;
+        margin-top: 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: white;
+        color: var(--leaf-900);
+        text-align: left;
+      }
+
+      .option.selected {
+        border-color: var(--leaf-700);
+        background: var(--leaf-50);
+      }
+
+      .actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .result-grid {
+        display: grid;
+        grid-template-columns: 1fr 0.78fr;
+        gap: 24px;
+      }
+
+      .score {
+        border-radius: 8px;
+        background: var(--leaf-50);
+        padding: 16px;
+        text-align: center;
+      }
+
+      .score strong {
+        display: block;
+        color: var(--leaf-800);
+        font-size: 44px;
+      }
+
+      pre {
+        max-height: 360px;
+        overflow: auto;
+        border-radius: 8px;
+        background: #10251d;
+        color: #e8fff1;
+        padding: 16px;
+        white-space: pre-wrap;
+      }
+
+      @media (max-width: 780px) {
+        main {
+          padding: 16px;
+        }
+
+        .pill {
+          display: none;
+        }
+
+        .hero,
+        .trust,
+        .content-grid,
+        .field-grid,
+        .result-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .actions {
+          flex-direction: column-reverse;
+        }
+
+        button,
+        .button {
+          width: 100%;
+        }
+      }
+
+      @media print {
+        body {
+          background: white;
+        }
+
+        .no-print {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="wrap top">
+        <div class="brand"><span class="logo">FSI</span><span>FamilyFSI<br /><span style="color:var(--leaf-700)">Chỉ số An toàn Tài chính Gia đình</span></span></div>
+        <div class="nav">
+          <button onclick="showPage('landing')">Trang chủ</button>
+          <button onclick="showPage('about')">Giới thiệu</button>
+          <button onclick="showPage('process')">Quy trình</button>
+          <button onclick="showPage('articles')">Bài viết</button>
+          <button onclick="showPage('resources')">Tài liệu</button>
+          <button onclick="showPage('videos')">Video</button>
+          <button onclick="startSurvey()">FSI</button>
+        </div>
+      </div>
+
+      <section id="landing" class="wrap">
+        <div class="hero">
+          <div>
+            <p class="eyebrow">FamilyFSI</p>
+            <h1>Chỉ số giúp gia đình trẻ nhìn rõ mức độ an toàn tài chính.</h1>
+            <p class="lead">
+              FamilyFSI giúp gia đình trẻ tự đánh giá dòng tiền, dự phòng, bảo vệ thu nhập và các mục tiêu dài hạn
+              trước khi bắt đầu một cuộc trao đổi tư vấn sâu hơn.
+            </p>
+            <button onclick="startSurvey()">Bắt đầu kiểm tra</button>
+          </div>
+          <div class="panel">
+            <p class="eyebrow">Cách tiếp cận</p>
+            <div class="benefit"><span class="num">1</span><span>Nói chuyện dễ hiểu, không làm phức tạp hóa tài chính gia đình.</span></div>
+            <div class="benefit"><span class="num">2</span><span>Tập trung vào ưu tiên thực tế trước khi bàn đến giải pháp.</span></div>
+            <div class="benefit"><span class="num">3</span><span>Giúp gia đình trẻ nhìn rõ dòng tiền, dự phòng và mục tiêu dài hạn.</span></div>
+          </div>
+        </div>
+        <div class="trust">
+          <div class="card">Tư vấn theo hướng cá nhân và giáo dục</div>
+          <div class="card">FSI giúp bắt đầu bằng một bức tranh rõ ràng</div>
+          <div class="card">Có thể trao đổi qua Zalo hoặc booking link sau</div>
+        </div>
+      </section>
+
+      <section id="about" class="wrap hidden">
+        <p class="eyebrow">Giới thiệu</p>
+        <h1>Một người đồng hành giúp tài chính gia đình bớt căng và dễ hiểu hơn.</h1>
+        <p class="lead">FamilyFSI là không gian giáo dục và tự đánh giá tài chính dành cho các gia đình trẻ. Trọng tâm là giúp anh/chị hiểu rõ tình hình hiện tại, biết điều gì nên ưu tiên và từng bước xây nền tài chính vững hơn.</p>
+        <div class="content-grid">
+          <div class="panel"><h2>FamilyFSI nghĩa là gì?</h2><p>FSI là viết tắt của Family Financial Safety Index. Đây là một khung tự đánh giá giúp gia đình nhìn lại dòng tiền, dự phòng, bảo vệ thu nhập và các mục tiêu dài hạn.</p></div>
+          <div class="panel"><h2>Đối tượng phù hợp</h2><p>Gia đình trẻ có con nhỏ, thu nhập gia đình từ khoảng 30 triệu đồng mỗi tháng, muốn nhìn lại dòng tiền, dự phòng, bảo vệ thu nhập và mục tiêu dài hạn.</p></div>
+        </div>
+        <div class="panel" style="margin-top:18px">
+          <h2>Làm việc cùng một đội ngũ tư vấn</h2>
+          <p>FamilyFSI được vận hành bởi một đội ngũ tư vấn. Khách hàng có thể được phân công cho thành viên phù hợp để được phản hồi đúng thời điểm và đúng nhu cầu hơn.</p>
+          <div class="content-grid" id="team-grid"></div>
+        </div>
+      </section>
+
+      <section id="process" class="wrap hidden">
+        <p class="eyebrow">Quy trình làm việc</p>
+        <h1>Một quy trình rõ ràng để gia đình biết mình đang ở đâu.</h1>
+        <div class="content-grid" id="process-grid"></div>
+        <div class="panel" style="margin-top:18px">
+          <h2>Cách đội ngũ xử lý lead</h2>
+          <div id="team-workflow"></div>
+        </div>
+      </section>
+
+      <section id="articles" class="wrap hidden">
+        <p class="eyebrow">Bài viết</p>
+        <h1>Nội dung dài giúp gia đình trẻ hiểu tài chính theo cách gần gũi hơn.</h1>
+        <div class="content-grid" id="article-grid"></div>
+      </section>
+
+      <section id="article-detail" class="wrap hidden"></section>
+
+      <section id="resources" class="wrap hidden">
+        <p class="eyebrow">Tài liệu tải về</p>
+        <h1>Checklist, guide và worksheet để gia đình tự rà soát từng phần.</h1>
+        <div class="content-grid" id="resource-grid"></div>
+      </section>
+
+      <section id="resource-detail" class="wrap hidden"></section>
+
+      <section id="videos" class="wrap hidden">
+        <p class="eyebrow">Video</p>
+        <h1>Video ngắn để giải thích tài chính gia đình bằng ngôn ngữ đời thường.</h1>
+        <div class="content-grid" id="video-grid"></div>
+      </section>
+
+      <section id="survey" class="survey hidden">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px;color:var(--leaf-700);font-size:14px">
+          <span id="step-label">Thông tin chung</span><span id="progress-label">9%</span>
+        </div>
+        <div class="progress"><div id="bar" class="bar"></div></div>
+        <div class="panel" style="margin-top:20px">
+          <div id="question-host"></div>
+          <p id="validation" class="hidden" style="background:var(--warm-100);padding:12px;border-radius:8px;font-weight:700">
+            Anh/chị vui lòng chọn một câu trả lời trước khi tiếp tục.
+          </p>
+          <div class="actions">
+            <button class="secondary" onclick="back()" id="back">Quay lại</button>
+            <button onclick="next()" id="next">Tiếp tục</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="result" class="wrap hidden"></section>
+    </main>
+
+    <script>
+      const infoFields = [
+        ["ageGroup", "Nhóm độ tuổi", ["Dưới 25", "25-34", "35-44", "45-54", "Từ 55 trở lên"]],
+        ["familyStatus", "Tình trạng gia đình", ["Độc thân", "Đã kết hôn", "Đã kết hôn và có con", "Khác"]],
+        ["dependents", "Số người phụ thuộc", ["0", "1", "2", "3", "4 trở lên"]],
+        ["incomeSource", "Nguồn thu nhập chính", ["Lương cố định", "Kinh doanh/tự do", "Nhiều nguồn thu", "Khác"]],
+        ["monthlyIncome", "Tổng thu nhập hàng tháng", ["Dưới 20 triệu", "20-40 triệu", "40-70 triệu", "70-100 triệu", "Trên 100 triệu", "Chưa muốn chia sẻ"]]
+      ];
+
+      const processSteps = [
+        ["Lắng nghe bức tranh hiện tại", "Bắt đầu bằng cuộc trò chuyện nhẹ nhàng về thu nhập, chi tiêu, người phụ thuộc, mục tiêu và những điều gia đình đang băn khoăn."],
+        ["Đánh giá mức độ an toàn tài chính", "Dùng FSI và một số câu hỏi nền tảng để nhìn rõ điểm mạnh, khoảng trống và mức độ ưu tiên của từng phần."],
+        ["Xác định ưu tiên trước", "Không ôm quá nhiều việc cùng lúc. Gia đình sẽ chọn 1-3 ưu tiên thực tế như dòng tiền, quỹ dự phòng, bảo vệ thu nhập hoặc học vấn cho con."],
+        ["Thiết kế phương án phù hợp", "Phương án cần vừa với ngân sách, hoàn cảnh và nhịp sống của gia đình, thay vì chỉ đẹp trên giấy."],
+        ["Đồng hành và rà soát định kỳ", "Tài chính gia đình thay đổi theo thu nhập, con cái, công việc và mục tiêu sống. Việc rà soát định kỳ giúp kế hoạch luôn còn phù hợp."]
+      ];
+
+      const articles = [
+        ["quy-du-phong-gia-dinh-tre", "Gia đình trẻ nên có quỹ dự phòng bao nhiêu là đủ?", "Một cách đơn giản để tính quỹ dự phòng theo chi phí thiết yếu, số người phụ thuộc và mức độ ổn định của nguồn thu nhập.", ["Quỹ dự phòng là khoản tiền giúp gia đình có thời gian xoay xở khi thu nhập bị gián đoạn, có chi phí y tế bất ngờ hoặc phát sinh việc lớn ngoài kế hoạch.", "Một cách dễ bắt đầu là tính theo chi phí thiết yếu hằng tháng. Chi phí thiết yếu thường gồm ăn uống, nhà ở, điện nước, học phí, đi lại, khoản vay bắt buộc và các chi phí cơ bản.", "Nếu nguồn thu nhập ổn định, gia đình có thể bắt đầu với mục tiêu 3 tháng chi phí thiết yếu. Nếu thu nhập biến động hoặc chỉ có một người tạo thu nhập chính, mục tiêu 6 tháng sẽ an toàn hơn.", "Điều quan trọng là không cần hoàn thành ngay. Gia đình có thể đặt mục tiêu nhỏ trước, ví dụ tích lũy một tháng chi phí thiết yếu, sau đó tăng dần."]],
+        ["khoang-trong-tai-chinh-sau-khi-co-con", "5 khoảng trống tài chính thường bị bỏ qua sau khi có con", "Khi gia đình có thêm em bé, nhiều khoản chi và rủi ro mới xuất hiện. Bài viết giúp anh/chị nhìn lại các điểm dễ quên.", ["Sau khi có con, tài chính gia đình thường thay đổi nhanh hơn mình tưởng. Không chỉ có thêm chi phí sữa, bỉm, khám bệnh hay học phí, gia đình còn có thêm trách nhiệm dài hạn.", "Khoảng trống đầu tiên là dòng tiền. Nhiều gia đình vẫn có thu nhập tốt nhưng không rõ tiền đi đâu mỗi tháng.", "Khoảng trống thứ hai là quỹ dự phòng. Trẻ nhỏ thường kéo theo nhiều phát sinh, từ y tế đến thay đổi người chăm sóc.", "Khoảng trống thứ ba là bảo vệ nguồn thu nhập. Nếu người tạo thu nhập chính không thể làm việc trong một thời gian, gia đình sẽ cần phương án để duy trì sinh hoạt."]],
+        ["bao-ve-thu-nhap-la-gi", "Bảo vệ thu nhập là gì và vì sao quan trọng?", "Một góc nhìn thực tế về việc gia đình sẽ duy trì cuộc sống như thế nào nếu nguồn thu chính bị gián đoạn.", ["Với nhiều gia đình trẻ, tài sản lớn nhất không phải là khoản tiết kiệm hiện tại, mà là khả năng tạo thu nhập trong nhiều năm tới.", "Bảo vệ thu nhập là chuẩn bị phương án để gia đình vẫn có tiền duy trì cuộc sống nếu người tạo thu nhập chính tạm thời hoặc dài ngày không thể làm việc.", "Một kế hoạch bảo vệ thu nhập thường bắt đầu từ ba câu hỏi: gia đình cần bao nhiêu tiền mỗi tháng, khoản dự phòng kéo dài được bao lâu, và nghĩa vụ nào vẫn phải trả dù thu nhập giảm.", "Không nên nhìn bảo vệ thu nhập như một quyết định mua sản phẩm đơn lẻ. Đó là một phần của bức tranh tài chính gia đình."]],
+        ["hoc-van-cho-con-bat-dau-tu-dau", "Chuẩn bị học vấn cho con: bắt đầu từ đâu?", "Không nhất thiết phải bắt đầu bằng một con số lớn. Điều quan trọng là có mục tiêu, thời gian và thói quen tích lũy đều.", ["Kế hoạch học vấn cho con thường khiến cha mẹ thấy áp lực vì con số tương lai có vẻ rất lớn. Nhưng nếu nhìn theo từng bước nhỏ, việc chuẩn bị có thể nhẹ nhàng hơn nhiều.", "Bước đầu tiên là xác định mục tiêu gần đúng. Gia đình muốn chuẩn bị cho trường công, trường tư, đại học trong nước, du học hay một khoản linh hoạt cho cơ hội học tập?", "Bước thứ hai là nhìn thời gian. Con càng nhỏ, gia đình càng có lợi thế vì có nhiều năm để tích lũy.", "Một kế hoạch tốt không cần hoàn hảo từ đầu, nhưng cần được duy trì và cập nhật."]
+        ]
+      ];
+
+      const resources = [
+        ["Family Financial Safety Checklist", "Checklist một trang để gia đình rà soát dòng tiền, dự phòng, bảo vệ và mục tiêu dài hạn.", "PDF · Bản xem trước", ["Dòng tiền hằng tháng: gia đình có biết rõ tiền đang đi đâu không?", "Quỹ dự phòng: hiện đủ duy trì bao nhiêu tháng chi phí thiết yếu?", "Bảo vệ thu nhập: nếu nguồn thu chính gián đoạn, gia đình có phương án chưa?", "Mục tiêu cho con: học vấn, y tế và các khoản phát sinh đã được tính đến chưa?", "Nghỉ hưu của cha mẹ: có đang được chuẩn bị song song với mục tiêu cho con không?"]],
+        ["30-Day Family Cash Flow Review", "Mẫu theo dõi 30 ngày giúp gia đình hiểu tiền đang đi đâu mà không cần dùng công thức phức tạp.", "Google Sheet · Bản xem trước", ["Theo dõi chi thiết yếu, chi chất lượng sống và chi phát sinh trong 30 ngày.", "Đánh dấu các khoản chi lặp lại nhưng ít được để ý.", "Tìm 1-2 khoản có thể điều chỉnh mà không làm gia đình thấy quá gò bó.", "Tính tỷ lệ tiết kiệm hoặc tích lũy thực tế sau khi trừ chi phí.", "Chọn một thói quen dòng tiền để duy trì trong tháng tiếp theo."]],
+        ["Education Planning Starter Guide", "Hướng dẫn nhập môn để bắt đầu chuẩn bị học vấn cho con theo từng giai đoạn.", "PDF · Bản xem trước", ["Xác định mục tiêu học vấn gần đúng thay vì cần con số hoàn hảo ngay.", "Tính thời gian còn lại đến từng cột mốc quan trọng.", "Chọn mức tích lũy định kỳ phù hợp với dòng tiền hiện tại.", "Tách riêng khoản học vấn để tránh dùng lẫn cho chi tiêu ngắn hạn.", "Rà soát lại kế hoạch khi thu nhập, học phí hoặc định hướng của con thay đổi."]]
+      ];
+
+      const teamMembers = [
+        ["duy-pham", "Duy Phạm", "Lead advisor"],
+        ["advisor-1", "Thành viên tư vấn 1", "Family finance advisor"],
+        ["advisor-2", "Thành viên tư vấn 2", "Family finance advisor"]
+      ];
+
+      const videos = [
+        ["Quỹ dự phòng gia đình: bắt đầu thế nào cho nhẹ?", "Video ngắn giải thích cách chọn mục tiêu quỹ dự phòng theo chi phí thiết yếu.", "YouTube / Facebook · Chưa gắn link"],
+        ["3 câu hỏi tài chính nên bàn trước khi có con", "Một khung trò chuyện đơn giản cho các cặp vợ chồng trẻ.", "YouTube / Facebook · Chưa gắn link"],
+        ["FSI là gì và đọc kết quả như thế nào?", "Video giới thiệu công cụ Family Financial Safety Index cho người mới.", "YouTube / Facebook · Chưa gắn link"]
+      ];
+
+      const questions = [
+        ["spending-control", "Kiểm soát dòng tiền", "Hiện tại, anh/chị kiểm soát chi tiêu hàng tháng ở mức nào?", ["Tôi theo dõi khá rõ và biết tiền đi đâu mỗi tháng", "Tôi có theo dõi, nhưng đôi lúc vẫn chi vượt kế hoạch", "Tôi chỉ ước lượng, chưa kiểm soát thật sự rõ", "Tôi thường chi tiêu theo phát sinh, cuối tháng mới nhìn lại"], [5, 3, 2, 1]],
+        ["essential-expense", "Tỷ lệ chi thiết yếu", "Trong tổng thu nhập hàng tháng, các khoản chi thiết yếu của gia đình anh/chị hiện chiếm khoảng bao nhiêu?", ["Dưới 50%", "Khoảng 50%–60%", "Khoảng 60%–70%", "Trên 70%"], [5, 3, 2, 1]],
+        ["lifestyle-expense", "Chi cho chất lượng sống", "Trong tổng thu nhập hàng tháng, anh/chị thường dành khoảng bao nhiêu cho các khoản chi cho chất lượng sống như ăn uống ngoài, mua sắm, giải trí, du lịch hoặc sở thích cá nhân?", ["Dưới 20%", "Khoảng 20%–30%", "Khoảng 30%–40%", "Trên 40%"], [3, 5, 2, 1]],
+        ["debt-obligation", "Áp lực nghĩa vụ tài chính", "Hiện tại, các khoản vay hoặc nghĩa vụ tài chính cố định của gia đình đang ở mức nào so với khả năng chi trả?", ["Ở mức an toàn, gia đình vẫn chủ động và trả khá thoải mái", "Có áp lực nhưng vẫn trong khả năng xoay xở", "Khá căng, nếu có biến cố sẽ dễ bị ảnh hưởng", "Đang là áp lực lớn đối với tài chính gia đình"], [5, 3, 2, 1]],
+        ["emergency-fund", "Quỹ dự phòng", "Nếu thu nhập của gia đình bị gián đoạn, quỹ dự phòng hiện tại có thể giúp anh/chị xoay xở trong bao lâu?", ["Trên 6 tháng", "Khoảng 3 đến 6 tháng", "Dưới 3 tháng", "Hiện tại gần như chưa có quỹ dự phòng riêng"], [5, 3, 2, 1]],
+        ["income-protection", "Bảo vệ nguồn thu nhập", "Nếu người tạo ra thu nhập chính trong gia đình tạm thời hoặc dài ngày không thể làm việc, gia đình anh/chị hiện có phương án tài chính nào để duy trì cuộc sống?", ["Đã có phương án khá rõ để gia đình vẫn duy trì ổn định trong nhiều năm", "Đã có chuẩn bị, nhưng chưa thật sự chắc mức độ đủ đến đâu", "Chủ yếu sẽ phải dùng tiền tiết kiệm hoặc tài sản đang có", "Hiện tại chưa có phương án tài chính rõ ràng"], [5, 3, 2, 1]],
+        ["health-shock", "Dự phòng rủi ro sức khỏe", "Nếu có một vấn đề sức khỏe nghiêm trọng hoặc cần điều trị tốn kém, gia đình anh/chị hiện sẽ xoay xở chi phí theo cách nào?", ["Đã có giải pháp khá đầy đủ nên ít ảnh hưởng đến tài chính gia đình", "Có một phần chuẩn bị, nhưng vẫn có thể phải bù thêm từ tiền riêng", "Có thể sẽ phải dùng đến tiền tiết kiệm hoặc quỹ dành cho mục tiêu khác", "Chưa có chuẩn bị rõ ràng, nếu xảy ra sẽ khá áp lực"], [5, 3, 2, 1]],
+        ["education-plan", "Kế hoạch học vấn cho con", "Nếu gia đình có con, anh/chị hiện đã chuẩn bị cho kế hoạch học vấn của con ở mức nào?", ["Đã có kế hoạch riêng và duy trì đều đặn", "Đã bắt đầu chuẩn bị nhưng chưa thật sự đều", "Có nghĩ đến nhưng chưa bắt đầu rõ ràng", "Chưa có kế hoạch cụ thể", "Gia đình hiện chưa có con / chưa cần ưu tiên nội dung này"], [5, 3, 2, 1, 3]],
+        ["retirement-plan", "Chuẩn bị nghỉ hưu", "Anh/chị đang chuẩn bị cho giai đoạn nghỉ hưu của mình ở mức nào?", ["Đã có kế hoạch riêng và đang tích lũy đều đặn", "Đã bắt đầu chuẩn bị nhưng chưa thật sự rõ ràng", "Mới chỉ trông vào các nguồn cơ bản như BHXH/lương hưu", "Chưa có kế hoạch cụ thể cho giai đoạn nghỉ hưu"], [5, 3, 2, 1]],
+        ["regular-investing", "Tích lũy và đầu tư định kỳ", "Hiện tại, anh/chị có duy trì việc tích lũy hoặc đầu tư định kỳ để vừa xây dựng tương lai, vừa tăng thêm độ an toàn tài chính cho gia đình không?", ["Có, tôi duy trì đều đặn một phần rõ ràng mỗi tháng", "Có, nhưng chưa đều và còn tùy từng thời điểm", "Thỉnh thoảng mới để dành hoặc đầu tư", "Hiện tại gần như chưa có thói quen này"], [5, 3, 2, 1]]
+      ];
+
+      const zoneContent = {
+        green: ["Vùng Xanh", "Nền tảng tài chính khá vững vàng", "Gia đình anh/chị đang có nhiều thói quen tài chính tích cực. Đây là thời điểm phù hợp để rà soát mức bảo vệ, tối ưu kế hoạch dài hạn và duy trì kỷ luật hiện tại."],
+        yellow: ["Vùng Vàng", "Tài chính gia đình đang ở mức khá, nhưng vẫn còn vài khoảng cần củng cố", "Gia đình anh/chị đã có nền tảng tương đối ổn. Một vài điểm như dự phòng, bảo vệ thu nhập hoặc kế hoạch dài hạn nên được làm rõ hơn để tài chính bền vững hơn."],
+        orange: ["Vùng Cam", "Tài chính gia đình có những nền tảng nhất định, nhưng đang tồn tại nhiều khoảng trống cần lưu ý", "Gia đình anh/chị có thể đã bắt đầu chuẩn bị ở một số mặt, nhưng vẫn còn các khoảng trống dễ tạo áp lực khi có biến động. Nên ưu tiên những bước đơn giản, thực tế và có tác động ngay."],
+        red: ["Vùng Đỏ", "Tài chính gia đình hiện còn khá nhiều điểm cần được quan tâm sớm", "Kết quả này không phải để đánh giá đúng sai, mà để giúp gia đình nhìn rõ các ưu tiên trước mắt. Bắt đầu từ kiểm soát dòng tiền, quỹ dự phòng và phương án bảo vệ cơ bản sẽ tạo nền chắc hơn."]
+      };
+
+      let step = 0;
+      let info = JSON.parse(localStorage.getItem("fsi-preview-info") || "{}");
+      let answers = JSON.parse(localStorage.getItem("fsi-preview-answers") || "{}");
+
+      function showPage(id) {
+        ["landing", "about", "process", "articles", "article-detail", "resources", "resource-detail", "videos", "survey", "result"].forEach((key) => document.getElementById(key).classList.toggle("hidden", key !== id));
+        scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function startSurvey() {
+        show("survey");
+        render();
+      }
+
+      function show(id) {
+        showPage(id);
+      }
+
+      function render() {
+        localStorage.setItem("fsi-preview-info", JSON.stringify(info));
+        localStorage.setItem("fsi-preview-answers", JSON.stringify(answers));
+        document.getElementById("validation").classList.add("hidden");
+        document.getElementById("back").disabled = step === 0;
+        document.getElementById("next").textContent = step === questions.length ? "Xem kết quả" : "Tiếp tục";
+        const progress = Math.round(((step + 1) / (questions.length + 1)) * 100);
+        document.getElementById("bar").style.width = progress + "%";
+        document.getElementById("progress-label").textContent = progress + "%";
+        document.getElementById("step-label").textContent = step === 0 ? "Thông tin chung" : `Câu ${step}/10`;
+
+        const host = document.getElementById("question-host");
+        if (step === 0) {
+          host.innerHTML = `<p class="eyebrow">Bước 1</p><h2>Thông tin chung</h2><p>Một vài thông tin ngắn giúp kết quả dễ đọc hơn. Anh/chị có thể bỏ qua nếu chưa muốn chia sẻ.</p><div class="field-grid">${infoFields.map(([id, label, options]) => `<label><span>${label}</span><select onchange="info['${id}']=this.value;render()"><option value="">Chọn thông tin phù hợp</option>${options.map((option) => `<option ${info[id] === option ? "selected" : ""}>${option}</option>`).join("")}</select></label>`).join("")}</div>`;
+          return;
+        }
+
+        const q = questions[step - 1];
+        host.innerHTML = `<p class="eyebrow">${q[1]}</p><h2>${step}. ${q[2]}</h2>${q[3].map((label, index) => `<button class="option ${answers[q[0]] === "a" + (index + 1) ? "selected" : ""}" onclick="answers['${q[0]}']='a${index + 1}';render()">${label}</button>`).join("")}`;
+      }
+
+      function back() {
+        step = Math.max(0, step - 1);
+        render();
+        scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function next() {
+        if (step > 0 && !answers[questions[step - 1][0]]) {
+          document.getElementById("validation").classList.remove("hidden");
+          return;
+        }
+        if (step < questions.length) {
+          step++;
+          render();
+          scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+        showResult();
+      }
+
+      function getReport() {
+        const perQuestionScore = questions.map((q) => {
+          const answerId = answers[q[0]];
+          const index = Number((answerId || "a0").slice(1)) - 1;
+          return { questionId: q[0], dimension: q[1], answer: q[3][index] || "", score: q[4][index] || 0 };
+        });
+        const totalScore = perQuestionScore.reduce((sum, item) => sum + item.score, 0);
+        const zoneKey = totalScore >= 43 ? "green" : totalScore >= 35 ? "yellow" : totalScore >= 25 ? "orange" : "red";
+        const strongest = [...perQuestionScore].sort((a, b) => b.score - a.score).slice(0, 3);
+        const weakest = [...perQuestionScore].sort((a, b) => a.score - b.score).slice(0, 3);
+        const zone = zoneContent[zoneKey];
+        return {
+          respondentInfo: info,
+          leadInfo: JSON.parse(localStorage.getItem("fsi-preview-lead") || "{}"),
+          rawAnswers: answers,
+          perQuestionScore,
+          totalScore,
+          maxScore: 50,
+          zone: { key: zoneKey, label: zone[0], title: zone[1], summary: zone[2] },
+          strongestDimensions: strongest,
+          weakestDimensions: weakest,
+          strengths: strongest.map((item) => `${item.dimension}: đang là điểm tương đối tốt trong hồ sơ hiện tại.`),
+          areasToStrengthen: weakest.map((item) => `${item.dimension}: nên được xem lại để giảm áp lực khi có thay đổi lớn.`),
+          suggestedPriorities: [`Làm rõ kế hoạch cho ${weakest[0].dimension.toLowerCase()}.`, `Làm rõ kế hoạch cho ${weakest[1].dimension.toLowerCase()}.`, "Củng cố các bước nhỏ, rõ ràng và duy trì đều đặn."],
+          generatedSummary: `FSI ${totalScore}/50 - ${zone[0]}: ${zone[1]}. Điểm mạnh nổi bật: ${strongest.map((item) => item.dimension).join(", ")}. Khoảng cần trao đổi thêm: ${weakest.map((item) => item.dimension).join(", ")}.`,
+          advisorReview: {
+            opener: "Cảm ơn anh/chị đã hoàn thành bài kiểm tra. Mình có thể cùng nhìn nhanh 2-3 điểm đang ảnh hưởng nhiều nhất đến độ an toàn tài chính của gia đình.",
+            discoveryFocus: `Ưu tiên hỏi thêm về ${weakest.map((item) => item.dimension.toLowerCase()).join(", ")} để hiểu nguyên nhân, mức độ cấp thiết và khả năng hành động trong 30-90 ngày tới.`,
+            softClose: "Chốt lại bằng một bước nhỏ, cụ thể và phù hợp với ngân sách hiện tại thay vì đưa quá nhiều giải pháp cùng lúc."
+          },
+          generatedAt: new Date().toISOString()
+        };
+      }
+
+      function showResult() {
+        const report = getReport();
+        localStorage.setItem("fsi-preview-result", JSON.stringify(report));
+        const json = JSON.stringify(report, null, 2).replaceAll("<", "&lt;");
+        document.getElementById("result").innerHTML = `<div class="result-grid"><div class="panel"><p class="eyebrow">Kết quả của anh/chị</p><div style="display:flex;gap:16px;justify-content:space-between;align-items:end;flex-wrap:wrap"><div><h1 style="font-size:42px">${report.zone.label}</h1><h2>${report.zone.title}</h2></div><div class="score"><span>Tổng điểm</span><strong>${report.totalScore}<small>/50</small></strong></div></div><p>${report.zone.summary}</p>${list("3 điểm mạnh hiện tại", report.strengths)}${list("3 điểm nên củng cố", report.areasToStrengthen)}${list("3 ưu tiên gợi ý", report.suggestedPriorities)}<div class="card" style="background:var(--warm-50);margin-top:24px"><h2>Gợi ý trao đổi tiếp theo</h2><p>Tư vấn viên có thể dùng kết quả này để mở cuộc trò chuyện nhẹ nhàng về dòng tiền, dự phòng, bảo vệ thu nhập và những mục tiêu gia đình muốn ưu tiên trong vài năm tới.</p></div>${leadForm(report.leadInfo)}<div class="actions no-print"><button onclick="print()">In kết quả</button><button class="secondary" onclick="navigator.clipboard.writeText('${report.generatedSummary.replaceAll("'", "\\'")}')">Sao chép tóm tắt</button></div></div><aside><div class="panel"><p class="eyebrow">Nội bộ tư vấn</p><h2>Advisor review</h2><p>${report.generatedSummary}</p>${advisorBlock("Gợi ý mở đầu", report.advisorReview.opener)}${advisorBlock("Câu hỏi nên đào sâu", report.advisorReview.discoveryFocus)}${advisorBlock("Cách kết thúc mềm", report.advisorReview.softClose)}</div><div class="panel" style="margin-top:18px"><h2>Dữ liệu xuất nội bộ</h2><p>Dùng cấu trúc này cho Google Sheets, CRM, email hoặc PDF sau này.</p><pre>${json}</pre></div></aside></div>`;
+        show("result");
+        scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function list(title, items) {
+        return `<section style="margin-top:24px"><h2>${title}</h2>${items.map((item) => `<div class="card" style="margin-top:10px">${item}</div>`).join("")}</section>`;
+      }
+
+      function advisorBlock(title, body) {
+        return `<div class="card" style="background:var(--leaf-50);margin-top:12px"><strong>${title}</strong><p style="margin-bottom:0">${body}</p></div>`;
+      }
+
+      function leadForm(lead = {}) {
+        return `<form class="card no-print" style="margin-top:24px" onsubmit="saveLead(event)"><h2>Thông tin liên hệ tư vấn</h2><p>Phần này giúp đội ngũ tư vấn lưu lại nhu cầu trao đổi tiếp theo và phân công người phụ trách.</p><div class="field-grid"><label><span>Họ tên</span><input type="text" name="fullName" value="${lead.fullName || ""}" placeholder="Nhập họ tên"></label><label><span>Số điện thoại</span><input type="tel" name="phone" value="${lead.phone || ""}" placeholder="Nhập số điện thoại"></label><label><span>Thời gian tiện liên hệ</span><select name="preferredContactTime"><option value="">Chọn thời gian phù hợp</option>${["Buổi sáng", "Buổi chiều", "Buổi tối", "Cuối tuần"].map((item) => `<option ${lead.preferredContactTime === item ? "selected" : ""}>${item}</option>`).join("")}</select></label><label><span>Ghi chú cho tư vấn viên</span><input type="text" name="note" value="${lead.note || ""}" placeholder="Ví dụ: muốn trao đổi về quỹ dự phòng"></label><label><span>Muốn trao đổi với ai?</span><select name="preferredAdvisorId"><option value="">Đội ngũ phân công phù hợp</option>${teamMembers.map((member) => `<option value="${member[0]}" ${lead.preferredAdvisorId === member[0] ? "selected" : ""}>${member[1]}</option>`).join("")}</select></label><label><span>Phân công nội bộ</span><select name="assignedAdvisorId"><option value="">Chưa phân công</option>${teamMembers.map((member) => `<option value="${member[0]}" ${lead.assignedAdvisorId === member[0] ? "selected" : ""}>${member[1]} · ${member[2]}</option>`).join("")}</select></label></div><label style="display:flex;gap:10px;margin-top:14px"><input type="checkbox" name="consent" ${lead.consent ? "checked" : ""}><span>Tôi đồng ý để tư vấn viên liên hệ lại về kết quả tự kiểm tra này.</span></label><button style="margin-top:16px">Lưu thông tin liên hệ</button><span id="lead-saved" style="display:none;margin-left:12px;font-weight:700;color:var(--leaf-700)">Đã lưu vào báo cáo nội bộ.</span></form>`;
+      }
+
+      function saveLead(event) {
+        event.preventDefault();
+        const data = Object.fromEntries(new FormData(event.target).entries());
+        data.consent = event.target.consent.checked;
+        data.leadSource = "fsi-result";
+        data.routingStatus = data.assignedAdvisorId ? "assigned" : "new";
+        data.submittedAt = new Date().toISOString();
+        localStorage.setItem("fsi-preview-lead", JSON.stringify(data));
+        localStorage.setItem("fsi-preview-result", JSON.stringify(getReport()));
+        const saved = document.getElementById("lead-saved");
+        saved.style.display = "inline";
+      }
+
+      document.getElementById("process-grid").innerHTML = processSteps.map((item, index) => `<div class="panel"><p class="eyebrow">Bước ${index + 1}</p><h2>${item[0]}</h2><p>${item[1]}</p></div>`).join("");
+      document.getElementById("article-grid").innerHTML = articles.map((item, index) => `<div class="panel"><p class="eyebrow">Bài viết</p><h2>${item[1]}</h2><p>${item[2]}</p><button class="secondary" onclick="showArticle(${index})">Đọc bài viết</button></div>`).join("");
+      document.getElementById("resource-grid").innerHTML = resources.map((item, index) => `<div class="panel"><p class="eyebrow">${item[2]}</p><h2>${item[0]}</h2><p>${item[1]}</p><button class="secondary" onclick="showResource(${index})">Xem tài liệu</button></div>`).join("");
+      document.getElementById("video-grid").innerHTML = videos.map((item) => `<div class="panel"><p class="eyebrow">${item[2]}</p><h2>${item[0]}</h2><p>${item[1]}</p></div>`).join("");
+
+      function showArticle(index) {
+        const article = articles[index];
+        const articleCtas = {
+          "quy-du-phong-gia-dinh-tre": "Muốn biết quỹ dự phòng hiện tại đang nằm ở mức nào trong bức tranh tài chính gia đình? Anh/chị có thể làm FSI để xem rõ hơn.",
+          "khoang-trong-tai-chinh-sau-khi-co-con": "Nếu anh/chị muốn rà lại xem gia đình mình đang có khoảng trống nào dễ bị bỏ qua nhất, FSI sẽ giúp bắt đầu rất nhanh.",
+          "bao-ve-thu-nhap-la-gi": "Để xem phần bảo vệ thu nhập đang mạnh hay còn thiếu trong tổng thể tài chính gia đình, anh/chị có thể tự kiểm tra bằng FSI.",
+          "hoc-van-cho-con-bat-dau-tu-dau": "Nếu muốn xem kế hoạch học vấn cho con đang đứng ở đâu so với các ưu tiên tài chính khác, anh/chị có thể bắt đầu với FSI."
+        };
+        document.getElementById("article-detail").innerHTML = `<p class="eyebrow">Bài viết</p><h1>${article[1]}</h1><p class="lead">${article[2]}</p><div class="panel" style="margin-top:24px">${article[3].map((paragraph) => `<p>${paragraph}</p>`).join("")}<button onclick="startSurvey()">Làm FSI sau khi đọc</button><button class="secondary" style="margin-left:8px" onclick="showPage('articles')">Xem bài khác</button></div>`;
+        const cta = articleCtas[article[0]] || "Nếu muốn nhìn lại bức tranh tài chính gia đình sau bài viết này, anh/chị có thể bắt đầu với FSI.";
+        const articleExtras = {
+          "quy-du-phong-gia-dinh-tre": [
+            "Với nhiều gia đình trẻ, sai lầm thường gặp là tính quỹ dự phòng theo tổng thu nhập thay vì chi phí cần sống. Điều cần biết trước là nếu gia đình tạm thời không có thu nhập, mỗi tháng cần bao nhiêu để vẫn sống ổn.",
+            "Quỹ dự phòng nên được để ở nơi an toàn, dễ rút và ít biến động. Đây không phải là khoản để tìm lợi nhuận cao, mà là lớp đệm giúp gia đình bình tĩnh khi có chuyện bất ngờ.",
+            "Nếu hiện tại gia đình chưa có quỹ dự phòng, bước đầu tiên không phải là tự trách mình. Hãy bắt đầu bằng một khoản nhỏ đều đặn mỗi tháng, rồi tăng dần khi dòng tiền thoải mái hơn."
+          ],
+          "khoang-trong-tai-chinh-sau-khi-co-con": [
+            "Những khoảng trống này thường không xuất hiện cùng lúc thật rõ ràng. Chúng đến từ nhiều khoản nhỏ, nhiều trách nhiệm mới và việc cha mẹ quá bận để ngồi lại nhìn tổng thể.",
+            "Một kế hoạch gia đình cân bằng không đặt con và cha mẹ vào thế phải chọn một trong hai. Mục tiêu là vừa chuẩn bị cho con, vừa không để tương lai của cha mẹ bị bỏ trống.",
+            "Cách tốt nhất để bắt đầu là chọn một khoảng trống dễ xử lý nhất trong 30 ngày tới: ghi lại chi tiêu, mở quỹ dự phòng riêng, hoặc thống nhất một ưu tiên chung với vợ/chồng."
+          ],
+          "bao-ve-thu-nhap-la-gi": [
+            "Gia đình càng phụ thuộc vào một nguồn thu chính, việc bảo vệ nguồn thu đó càng đáng được xem xét sớm. Với gia đình có con nhỏ, vài tháng thu nhập bị gián đoạn cũng có thể làm đảo lộn nhiều kế hoạch.",
+            "Một lỗi thường gặp là chọn giải pháp bảo vệ theo số tiền đóng mỗi năm, thay vì bắt đầu từ câu hỏi: nếu chuyện không mong muốn xảy ra, gia đình cần bao nhiêu tiền và trong bao lâu?",
+            "Bảo vệ thu nhập nên được nhìn như một phần của bức tranh tài chính, đi cùng quỹ dự phòng, khả năng tạo thu nhập và trách nhiệm dài hạn của gia đình."
+          ],
+          "hoc-van-cho-con-bat-dau-tu-dau": [
+            "Ở giai đoạn đầu, mục tiêu học vấn không cần chính xác tuyệt đối. Cha mẹ có thể chọn một kịch bản vừa phải, rồi điều chỉnh dần khi con lớn hơn và định hướng rõ hơn.",
+            "Khoản học vấn cũng không nên làm gia đình mất cân bằng. Nếu chưa có quỹ dự phòng hoặc dòng tiền còn quá căng, việc dồn toàn lực cho học vấn có thể khiến hiện tại thiếu an toàn.",
+            "Cha mẹ nên trao đổi với nhau về kỳ vọng giáo dục: mức đầu tư bao nhiêu là vừa, điều gì là ưu tiên thật sự, và điều gì chỉ là áp lực so sánh với người khác."
+          ]
+        };
+        articleExtras["quy-du-phong-gia-dinh-tre"].push(
+          "Nhiều gia đình chỉ bắt đầu nghĩ đến quỹ dự phòng khi đã có một biến cố xảy ra: công việc chậm lương, người thân nhập viện, con cần điều trị, hoặc một khoản vay đến hạn trong lúc thu nhập không đều.",
+          "Giá trị lớn nhất của quỹ dự phòng là mua cho gia đình thêm thời gian. Khi có thời gian, mình không cần bán vội tài sản, không cần vay nóng và cũng không phải quyết định trong trạng thái căng thẳng.",
+          "Với gia đình có con nhỏ, quỹ dự phòng còn bảo vệ nhịp sống của con. Khi người lớn gặp biến động, mình vẫn muốn con được đi học, được chăm sóc, được khám bệnh và giữ lịch sinh hoạt ổn định nhất có thể.",
+          "Bước đầu tiên là tách chi phí thành hai nhóm: chi phí thiết yếu và chi phí có thể điều chỉnh. Chi phí thiết yếu là những khoản nếu cắt đi sẽ ảnh hưởng ngay đến cuộc sống căn bản.",
+          "Ví dụ, gia đình chi 38 triệu mỗi tháng nhưng 26 triệu là chi thiết yếu. Khi tính quỹ dự phòng, nên bắt đầu từ 26 triệu, không phải 38 triệu.",
+          "Gia đình có thể chia quỹ dự phòng thành 3 tầng: khoản rất dễ rút cho vài tuần đầu, khoản linh hoạt cho vài tháng, và khoản mở rộng nếu thu nhập biến động hoặc trách nhiệm gia đình lớn.",
+          "Không nên đặt toàn bộ quỹ dự phòng vào kênh rủi ro cao. Các khoản đầu tư có thể phù hợp với mục tiêu dài hạn, nhưng không phù hợp để làm lớp tiền đầu tiên khi gia đình cần xử lý khẩn cấp.",
+          "Để tránh dùng nhầm, vợ chồng nên thống nhất trước thế nào là tình huống được rút quỹ dự phòng: mất thu nhập, chi phí y tế lớn, sửa chữa cần thiết hoặc hỗ trợ gia đình trong tình huống khẩn cấp.",
+          "Mỗi năm, gia đình nên rà soát lại mức quỹ dự phòng. Khi có thêm con, đổi trường, mua nhà, tăng khoản vay hoặc thay đổi công việc, mức dự phòng phù hợp cũng thay đổi.",
+          "Quỹ dự phòng không làm tiền tăng nhanh, nhưng giúp bảo vệ các kế hoạch tăng trưởng khỏi bị phá vỡ. Khi có lớp đệm, gia đình ít bị buộc phải bán khoản đầu tư vào thời điểm xấu.",
+          "Nếu đang bắt đầu từ con số 0, hãy đặt mục tiêu 10 triệu đầu tiên, sau đó là một tháng chi phí thiết yếu, rồi ba tháng. Mỗi mốc đạt được đều làm gia đình vững hơn."
+        );
+        articleExtras["khoang-trong-tai-chinh-sau-khi-co-con"].push(
+          "Có con là lúc tài chính gia đình bước sang một giai đoạn mới. Trước đây hai vợ chồng có thể linh hoạt hơn, nhưng sau khi có con, nhiều quyết định cần tính thêm sự ổn định.",
+          "Các thay đổi tài chính sau khi có con thường không xuất hiện dưới dạng một khoản thật lớn. Chúng đến từ nhiều khoản nhỏ, lặp lại và tăng dần nên rất dễ bị xem nhẹ.",
+          "Gia đình có thể vẫn kiếm tốt nhưng cuối tháng không dư bao nhiêu. Khi nhìn kỹ, tiền đi qua nhiều khoản nhỏ: đồ cho con, thuốc men, ăn ngoài vì bận, giao hàng, học thử, đồ chơi và phí dịch vụ.",
+          "Một cách kiểm tra là chọn 30 ngày ghi lại chi tiêu theo ba nhóm: thiết yếu, chất lượng sống và phát sinh. Mục tiêu không phải để soi lỗi, mà để thấy mẫu hình.",
+          "Nếu gia đình chỉ có một người tạo thu nhập chính hoặc một người đang tạm nghỉ để chăm con, quỹ dự phòng càng quan trọng vì nguồn thu đang phụ thuộc nhiều vào một điểm.",
+          "Bảo vệ nguồn thu nhập nên được nhìn như một phần của kế hoạch gia đình. Nếu người tạo thu nhập chính không thể làm việc, câu hỏi là gia đình dùng nguồn nào để duy trì sinh hoạt và chăm sóc con.",
+          "Kế hoạch học vấn không cần bắt đầu bằng một con số lớn. Khi con còn nhỏ, thời gian là lợi thế. Một khoản riêng đều đặn mỗi tháng có thể tạo nền tốt hơn nhiều so với chờ đến khi con lớn.",
+          "Nghỉ hưu của cha mẹ cũng cần được đặt trong bức tranh chung. Nếu cha mẹ bỏ quên hoàn toàn tương lai của mình, sau này con có thể trở thành người gánh áp lực ngược lại.",
+          "Một khoảng trống mềm nhưng quan trọng là vợ chồng không nói chuyện định kỳ về tiền. Nhiều gia đình chỉ nói khi có vấn đề, nên cuộc trò chuyện dễ căng thẳng hơn.",
+          "Một buổi trao đổi tài chính gia đình có thể bắt đầu bằng ba câu: tháng này điều gì ổn, điều gì làm mình lo, và tháng tới mình muốn ưu tiên một việc gì?",
+          "Gia đình trẻ cũng dễ bị ảnh hưởng bởi so sánh xã hội. Nhưng kế hoạch tốt phải quay lại bối cảnh riêng: thu nhập, khoản vay, số con, sức khỏe, công việc và mức chịu rủi ro của nhà mình."
+        );
+        articleExtras["bao-ve-thu-nhap-la-gi"].push(
+          "Khi nói đến tài sản, nhiều người nghĩ đến nhà, xe hoặc tiền tiết kiệm. Nhưng với gia đình trẻ, khả năng tạo thu nhập trong nhiều năm tới thường là tài sản lớn nhất.",
+          "Bảo vệ thu nhập bắt đầu từ một câu hỏi rất đời thường: nếu tháng sau nguồn thu chính giảm mạnh hoặc dừng lại, gia đình sẽ sống bằng gì?",
+          "Có nhiều tình huống khiến thu nhập bị gián đoạn: bệnh nghiêm trọng, tai nạn, mất việc, công ty thay đổi, kinh doanh chậm hoặc người chăm con chính gặp vấn đề sức khỏe.",
+          "Với gia đình có con nhỏ, nhiều khoản chi không thể dừng ngay: học phí, tiền nhà, ăn uống, khám bệnh, khoản vay và hỗ trợ người thân.",
+          "Một kế hoạch bảo vệ thu nhập tốt thường có nhiều lớp: quỹ dự phòng, khả năng điều chỉnh chi tiêu, năng lực tạo thu nhập thay thế và các giải pháp chuyển giao rủi ro nếu phù hợp.",
+          "Không nên xem bảo hiểm là lớp duy nhất, và cũng không nên xem tiết kiệm là đủ cho mọi rủi ro. Mỗi lớp có vai trò riêng trong bức tranh tài chính gia đình.",
+          "Để biết cần bảo vệ bao nhiêu, gia đình có thể tính từ chi phí thiết yếu và thời gian muốn duy trì. Nếu cần 30 triệu mỗi tháng, 3 năm đã là hơn 1 tỷ đồng.",
+          "Mức bảo vệ phù hợp khác nhau tùy gia đình. Người có khoản vay lớn, con nhỏ, cha mẹ phụ thuộc hoặc thu nhập một nguồn sẽ cần cách tính khác với gia đình có hai nguồn thu ổn định.",
+          "Vai trò của người không tạo thu nhập chính cũng có giá trị tài chính. Nếu người chăm con gặp vấn đề, gia đình có thể phải thuê hỗ trợ hoặc người còn lại phải giảm giờ làm.",
+          "Nếu gia đình đã có bảo hiểm, cũng nên rà soát định kỳ. Kế hoạch từng phù hợp vài năm trước có thể chưa còn khớp khi gia đình có thêm con, tăng khoản vay hoặc đổi thu nhập.",
+          "Một cuộc trao đổi tốt về bảo vệ thu nhập nên giúp gia đình hiểu hơn, không làm gia đình hoang mang hơn. Khi hiểu rõ, mình có thể chọn mức bảo vệ vừa sức và đúng trọng tâm."
+        );
+        articleExtras["hoc-van-cho-con-bat-dau-tu-dau"].push(
+          "Chuẩn bị học vấn cho con là một mục tiêu dễ chạm vào cảm xúc của cha mẹ. Ai cũng muốn con có điều kiện tốt, nhưng chính vì muốn điều tốt, cha mẹ đôi khi cảm thấy áp lực rất sớm.",
+          "Kế hoạch học vấn không phải là cam kết cha mẹ phải lo toàn bộ mọi chi phí ở mức cao nhất. Đó là cách gia đình tạo thêm lựa chọn cho con trong tương lai.",
+          "Gia đình không cần biết chính xác 15 năm nữa học phí là bao nhiêu. Gia đình chỉ cần bắt đầu với một mục tiêu hợp lý, rồi cập nhật theo thời gian.",
+          "Ba câu hỏi nên đặt ra là: gia đình muốn chuẩn bị cho giai đoạn nào, thời gian còn bao lâu, và mỗi tháng có thể dành bao nhiêu mà không làm hiện tại quá căng?",
+          "Nếu con còn nhỏ, lợi thế lớn nhất là thời gian. Một khoản 1-2 triệu mỗi tháng trong 15 năm có thể tạo nền tốt hơn nhiều so với chờ đến khi con gần vào đại học.",
+          "Giai đoạn đầu không cần chọn ngay một kênh phức tạp. Điều quan trọng nhất là tách riêng khoản học vấn và duy trì thói quen.",
+          "Một lỗi phổ biến là đặt mục tiêu quá cao ngay từ đầu rồi bỏ cuộc sau vài tháng. Mục tiêu tốt nên vừa đủ thử thách nhưng vẫn sống được với nó.",
+          "Kế hoạch học vấn nên đi cùng nền an toàn tài chính chung. Nếu chưa có quỹ dự phòng hoặc dòng tiền quá căng, dồn toàn lực cho học vấn có thể khiến hiện tại thiếu an toàn.",
+          "Cha mẹ nên thống nhất kỳ vọng giáo dục: điều gì quan trọng nhất, mức đầu tư bao nhiêu là vừa, và điều gì chỉ là áp lực so sánh.",
+          "Có thể chia kế hoạch thành nhiều tầng: khoản tích lũy chắc chắn, khoản đầu tư dài hạn nếu phù hợp, và khoản linh hoạt cho cơ hội phát sinh.",
+          "Kế hoạch học vấn tốt không phải là chạy theo một cuộc đua. Đó là quá trình tạo thêm lựa chọn cho con mà vẫn giữ gia đình an toàn ở hiện tại."
+        );
+        const extra = articleExtras[article[0]] || [];
+        if (extra.length > 0) {
+          const panel = document.querySelector("#article-detail .panel");
+          if (panel) panel.insertAdjacentHTML("beforeend", extra.map((paragraph) => `<p>${paragraph}</p>`).join(""));
+        }
+        const firstButton = document.querySelector("#article-detail button");
+        if (firstButton) {
+          firstButton.textContent = "Tự kiểm tra với FSI";
+          firstButton.insertAdjacentHTML("beforebegin", `<div class="card" style="background:var(--leaf-50);margin-top:20px"><p>${cta}</p></div>`);
+        }
+        showPage("article-detail");
+      }
+
+      function showResource(index) {
+        const item = resources[index];
+        document.getElementById("resource-detail").innerHTML = `<p class="eyebrow">${item[2]}</p><h1>${item[0]}</h1><p class="lead">${item[1]}</p><div class="result-grid" style="margin-top:24px"><div class="panel"><h2>Nội dung trong tài liệu</h2>${item[3].map((section, sectionIndex) => `<div class="card" style="margin-top:10px"><strong>${sectionIndex + 1}</strong>. ${section}</div>`).join("")}</div><div class="panel"><h2>Nhận tài liệu</h2><p>Form này đang là bản chuẩn bị cho Google Sheets, email hoặc CRM.</p><form onsubmit="saveGuideRequest(event, '${item[0].replaceAll("'", "\\'")}')"><label><span>Họ tên</span><input type="text" name="fullName" placeholder="Nhập họ tên"></label><label><span>Số điện thoại hoặc Zalo</span><input type="tel" name="contact" placeholder="Nhập thông tin liên hệ"></label><label><span>Email nếu muốn nhận file qua email</span><input type="text" name="email" placeholder="name@example.com"></label><label style="display:flex;gap:10px;margin-top:14px"><input type="checkbox" name="consent"><span>Tôi đồng ý để Duy Phạm liên hệ lại về tài liệu này.</span></label><button style="margin-top:16px">Gửi yêu cầu nhận tài liệu</button><span id="guide-saved" style="display:none;margin-left:12px;font-weight:700;color:var(--leaf-700)">Đã lưu yêu cầu.</span></form><button class="secondary" style="margin-top:12px" onclick="showPage('resources')">Xem tài liệu khác</button></div></div>`;
+        showPage("resource-detail");
+      }
+
+      function saveGuideRequest(event, guideTitle) {
+        event.preventDefault();
+        const data = Object.fromEntries(new FormData(event.target).entries());
+        data.guideTitle = guideTitle;
+        data.consent = event.target.consent.checked;
+        data.submittedAt = new Date().toISOString();
+        data.leadSource = "guide-request";
+        data.routingStatus = "new";
+        localStorage.setItem("fsi-preview-guide-request", JSON.stringify(data));
+        document.getElementById("guide-saved").style.display = "inline";
+      }
+
+      document.getElementById("team-grid").innerHTML = teamMembers.map((member) => `<div class="card"><strong>${member[1]}</strong><p>${member[2]}</p></div>`).join("");
+      document.getElementById("team-workflow").innerHTML = ["Lead được ghi nhận cùng nguồn phát sinh: FSI, tài liệu tải về, bài viết hoặc liên hệ trực tiếp.", "Đội ngũ có thể phân công người phụ trách dựa trên quan hệ sẵn có, thời gian tiện liên hệ hoặc năng lực chuyên môn.", "Tư vấn viên được phân công dùng advisor summary để chuẩn bị cuộc gọi đầu tiên.", "Sau cuộc trao đổi, trạng thái lead có thể được cập nhật trong Google Sheets hoặc CRM."].map((item, index) => `<div class="card" style="margin-top:10px"><strong>${index + 1}</strong>. ${item}</div>`).join("");
+
+      if (location.hash === "#survey") startSurvey();
+    </script>
+  </body>
+</html>
