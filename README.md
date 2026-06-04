@@ -129,39 +129,49 @@ Google Apps Script starter:
 const SHEET_NAME = "Leads";
 
 function doPost(e) {
-  const payload = JSON.parse(e.postData.contents);
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+  try {
+    const payload = JSON.parse(e.postData.contents);
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
 
-  sheet.appendRow([
-    payload.submittedAt,
-    payload.fullName,
-    payload.phone,
-    payload.preferredContactTime,
-    payload.note,
-    payload.consent,
-    payload.preferredAdvisorId,
-    payload.assignedAdvisorId,
-    payload.routingStatus,
-    payload.leadSource,
-    payload.ageGroup,
-    payload.familyStatus,
-    payload.dependents,
-    payload.incomeSource,
-    payload.monthlyIncome,
-    payload.totalScore,
-    payload.maxScore,
-    payload.zoneLabel,
-    payload.zoneTitle,
-    payload.strongestDimensions,
-    payload.weakestDimensions,
-    payload.suggestedPriorities,
-    payload.advisorSummary,
-    JSON.stringify(payload.rawReport)
-  ]);
+    if (!sheet) {
+      throw new Error(`Sheet tab "${SHEET_NAME}" was not found.`);
+    }
 
-  return ContentService
-    .createTextOutput(JSON.stringify({ ok: true }))
-    .setMimeType(ContentService.MimeType.JSON);
+    sheet.appendRow([
+      payload.submittedAt,
+      payload.fullName,
+      payload.phone,
+      payload.preferredContactTime,
+      payload.note,
+      payload.consent,
+      payload.preferredAdvisorId,
+      payload.assignedAdvisorId,
+      payload.routingStatus,
+      payload.leadSource,
+      payload.ageGroup,
+      payload.familyStatus,
+      payload.dependents,
+      payload.incomeSource,
+      payload.monthlyIncome,
+      payload.totalScore,
+      payload.maxScore,
+      payload.zoneLabel,
+      payload.zoneTitle,
+      payload.strongestDimensions,
+      payload.weakestDimensions,
+      payload.suggestedPriorities,
+      payload.advisorSummary,
+      JSON.stringify(payload.rawReport)
+    ]);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: false, error: String(error) }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
 }
 ```
 

@@ -95,10 +95,31 @@ export async function POST(request: Request) {
     body: JSON.stringify(sheetPayload)
   });
 
+  const responseBody = await response.text();
+
   if (!response.ok) {
-    const details = await response.text();
     return NextResponse.json(
-      { ok: false, error: "Google Sheets webhook failed.", details },
+      { ok: false, error: "Google Sheets webhook failed.", details: responseBody },
+      { status: 502 }
+    );
+  }
+
+  try {
+    const result = JSON.parse(responseBody) as { ok?: boolean; error?: string };
+
+    if (result.ok !== true) {
+      return NextResponse.json(
+        { ok: false, error: result.error ?? "Google Sheets webhook did not confirm success." },
+        { status: 502 }
+      );
+    }
+  } catch {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Google Sheets webhook returned a non-JSON response. Check Apps Script deployment access.",
+        details: responseBody.slice(0, 500)
+      },
       { status: 502 }
     );
   }
