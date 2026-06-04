@@ -104,6 +104,75 @@ After completion, the app generates a structured report in `createInternalReport
 
 The result page stores this object in `localStorage` under `fsi-result` and supports JSON export for later Google Sheets, PDF, email, or CRM workflows.
 
+## Google Sheets Lead Capture
+
+The result page submits completed lead information to `src/app/api/leads/route.ts`. That API route forwards a flattened lead payload to a Google Apps Script webhook.
+
+Required environment variable:
+
+```bash
+GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec
+```
+
+Suggested Google Sheet columns:
+
+```text
+submittedAt, fullName, phone, preferredContactTime, note, consent, preferredAdvisorId,
+assignedAdvisorId, routingStatus, leadSource, ageGroup, familyStatus, dependents,
+incomeSource, monthlyIncome, totalScore, maxScore, zoneLabel, zoneTitle,
+strongestDimensions, weakestDimensions, suggestedPriorities, advisorSummary, rawReport
+```
+
+Google Apps Script starter:
+
+```js
+const SHEET_NAME = "Leads";
+
+function doPost(e) {
+  const payload = JSON.parse(e.postData.contents);
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+
+  sheet.appendRow([
+    payload.submittedAt,
+    payload.fullName,
+    payload.phone,
+    payload.preferredContactTime,
+    payload.note,
+    payload.consent,
+    payload.preferredAdvisorId,
+    payload.assignedAdvisorId,
+    payload.routingStatus,
+    payload.leadSource,
+    payload.ageGroup,
+    payload.familyStatus,
+    payload.dependents,
+    payload.incomeSource,
+    payload.monthlyIncome,
+    payload.totalScore,
+    payload.maxScore,
+    payload.zoneLabel,
+    payload.zoneTitle,
+    payload.strongestDimensions,
+    payload.weakestDimensions,
+    payload.suggestedPriorities,
+    payload.advisorSummary,
+    JSON.stringify(payload.rawReport)
+  ]);
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ ok: true }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+```
+
+Apps Script deployment settings:
+
+- Deploy as `Web app`.
+- Execute as `Me`.
+- Who has access: `Anyone`.
+- Copy the `/exec` URL into `GOOGLE_SHEETS_WEBHOOK_URL` in Vercel Project Settings -> Environment Variables.
+- Redeploy the Vercel project after adding the environment variable.
+
 ## Run Locally
 
 ```bash

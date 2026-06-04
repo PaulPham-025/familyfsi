@@ -14,6 +14,8 @@ export default function ResultPage() {
   const [report, setReport] = useState<InternalFsiReport | null>(null);
   const [copied, setCopied] = useState(false);
   const [leadSaved, setLeadSaved] = useState(false);
+  const [leadSubmitStatus, setLeadSubmitStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [leadSubmitMessage, setLeadSubmitMessage] = useState("");
 
   useEffect(() => {
     const saved = window.localStorage.getItem(resultKey);
@@ -57,7 +59,7 @@ export default function ResultPage() {
     URL.revokeObjectURL(url);
   }
 
-  function saveLead(event: FormEvent<HTMLFormElement>) {
+  async function saveLead(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!report) return;
 
@@ -81,6 +83,27 @@ export default function ResultPage() {
     setReport(nextReport);
     window.localStorage.setItem(resultKey, JSON.stringify(nextReport));
     setLeadSaved(true);
+    setLeadSubmitStatus("submitting");
+    setLeadSubmitMessage("Đang gửi thông tin vào hệ thống lead...");
+
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(nextReport)
+      });
+
+      if (!response.ok) {
+        throw new Error("Lead submit failed");
+      }
+
+      setLeadSubmitStatus("success");
+      setLeadSubmitMessage("Đã gửi thông tin vào Google Sheets.");
+    } catch {
+      setLeadSubmitStatus("error");
+      setLeadSubmitMessage("Đã lưu trên trình duyệt, nhưng chưa gửi được vào Google Sheets. Anh/chị có thể thử lại sau.");
+    }
+
     window.setTimeout(() => setLeadSaved(false), 2200);
   }
 
@@ -135,7 +158,13 @@ export default function ResultPage() {
             </p>
           </div>
 
-          <LeadCaptureForm report={report} leadSaved={leadSaved} onSubmit={saveLead} />
+          <LeadCaptureForm
+            report={report}
+            leadSaved={leadSaved}
+            leadSubmitStatus={leadSubmitStatus}
+            leadSubmitMessage={leadSubmitMessage}
+            onSubmit={saveLead}
+          />
 
           <div className="no-print mt-7 flex flex-col gap-3 sm:flex-row">
             <Button type="button" onClick={() => window.print()}>
@@ -203,11 +232,15 @@ export default function ResultPage() {
 function LeadCaptureForm({
   report,
   leadSaved,
+  leadSubmitStatus,
+  leadSubmitMessage,
   onSubmit
 }: {
   report: InternalFsiReport;
   leadSaved: boolean;
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  leadSubmitStatus: "idle" | "submitting" | "success" | "error";
+  leadSubmitMessage: string;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void | Promise<void>;
 }) {
   return (
     <form onSubmit={onSubmit} className="no-print mt-8 rounded-[8px] border border-leaf-100 bg-white p-5">
@@ -300,9 +333,20 @@ function LeadCaptureForm({
         <span>Tôi đồng ý để tư vấn viên liên hệ lại về kết quả tự kiểm tra này.</span>
       </label>
       <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <Button type="submit">Lưu thông tin liên hệ</Button>
+        <Button type="submit" disabled={leadSubmitStatus === "submitting"}>
+          {leadSubmitStatus === "submitting" ? "Đang gửi..." : "Lưu thông tin liên hệ"}
+        </Button>
         {leadSaved ? <span className="text-sm font-semibold text-leaf-700">Đã lưu vào báo cáo nội bộ.</span> : null}
       </div>
+      {leadSubmitMessage ? (
+        <p
+          className={`mt-3 text-sm font-semibold ${
+            leadSubmitStatus === "error" ? "text-red-700" : "text-leaf-700"
+          }`}
+        >
+          {leadSubmitMessage}
+        </p>
+      ) : null}
     </form>
   );
 }
