@@ -94,14 +94,23 @@ export default function ResultPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Lead submit failed");
+        const result = (await response.json().catch(() => null)) as {
+          error?: string;
+          details?: string;
+        } | null;
+        const details = result?.details ? ` ${result.details.slice(0, 180)}` : "";
+        throw new Error(`${result?.error ?? "Lead submit failed."}${details}`);
       }
 
       setLeadSubmitStatus("success");
       setLeadSubmitMessage("Đã gửi thông tin vào Google Sheets.");
-    } catch {
+    } catch (error) {
       setLeadSubmitStatus("error");
-      setLeadSubmitMessage("Đã lưu trên trình duyệt, nhưng chưa gửi được vào Google Sheets. Anh/chị có thể thử lại sau.");
+      setLeadSubmitMessage(
+        `Đã lưu trên trình duyệt, nhưng chưa gửi được vào Google Sheets. Lỗi: ${
+          error instanceof Error ? error.message : "Không xác định"
+        }`
+      );
     }
 
     window.setTimeout(() => setLeadSaved(false), 2200);
