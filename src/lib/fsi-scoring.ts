@@ -16,6 +16,7 @@ export type InternalFsiReport = {
     fullName?: string;
     phone?: string;
     preferredContactTime?: string;
+    priorityTopic?: string;
     note?: string;
     consent?: boolean;
     preferredAdvisorId?: string;

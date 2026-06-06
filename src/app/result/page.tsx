@@ -9,6 +9,14 @@ import type { InternalFsiReport } from "@/lib/fsi-scoring";
 import { teamMembers } from "@/lib/site-content";
 
 const resultKey = "fsi-result";
+const priorityTopics = [
+  "Quỹ dự phòng",
+  "Bảo vệ thu nhập",
+  "Chi phí cho con",
+  "Kế hoạch học vấn",
+  "Nghỉ hưu",
+  "Chưa rõ, muốn được tư vấn tổng quan"
+];
 
 export default function ResultPage() {
   const [report, setReport] = useState<InternalFsiReport | null>(null);
@@ -70,6 +78,7 @@ export default function ResultPage() {
         fullName: String(formData.get("fullName") ?? ""),
         phone: String(formData.get("phone") ?? ""),
         preferredContactTime: String(formData.get("preferredContactTime") ?? ""),
+        priorityTopic: String(formData.get("priorityTopic") ?? ""),
         note: String(formData.get("note") ?? ""),
         consent: formData.get("consent") === "on",
         preferredAdvisorId: String(formData.get("preferredAdvisorId") ?? ""),
@@ -290,6 +299,21 @@ function LeadCaptureForm({
             <option>Buổi chiều</option>
             <option>Buổi tối</option>
             <option>Cuối tuần</option>
+          </select>
+        </label>
+        <label className="block">
+          <span className="mb-2 block text-sm font-semibold text-leaf-800">Anh/chị muốn ưu tiên trao đổi nội dung nào trước?</span>
+          <select
+            name="priorityTopic"
+            defaultValue={report.leadInfo?.priorityTopic ?? ""}
+            className="h-12 w-full rounded-[8px] border border-leaf-200 bg-white px-3 outline-none transition focus:border-leaf-500 focus:ring-4 focus:ring-leaf-100"
+          >
+            <option value="">Chọn nội dung ưu tiên</option>
+            {priorityTopics.map((topic) => (
+              <option key={topic} value={topic}>
+                {topic}
+              </option>
+            ))}
           </select>
         </label>
         <label className="block">

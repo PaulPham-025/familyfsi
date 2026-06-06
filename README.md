@@ -117,7 +117,7 @@ GOOGLE_SHEETS_WEBHOOK_URL=https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/
 Suggested Google Sheet columns:
 
 ```text
-submittedAt, fullName, phone, preferredContactTime, note, consent, preferredAdvisorId,
+submittedAt, fullName, phone, preferredContactTime, priorityTopic, note, consent, preferredAdvisorId,
 assignedAdvisorId, routingStatus, leadSource, ageGroup, familyStatus, dependents,
 incomeSource, monthlyIncome, totalScore, maxScore, zoneLabel, zoneTitle,
 strongestDimensions, weakestDimensions, suggestedPriorities, advisorSummary, rawReport
@@ -142,6 +142,7 @@ function doPost(e) {
       payload.fullName,
       payload.phone,
       payload.preferredContactTime,
+      payload.priorityTopic,
       payload.note,
       payload.consent,
       payload.preferredAdvisorId,

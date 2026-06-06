@@ -8,6 +8,7 @@ type LeadSheetPayload = {
   fullName: string;
   phone: string;
   preferredContactTime: string;
+  priorityTopic: string;
   note: string;
   consent: boolean;
   preferredAdvisorId: string;
@@ -43,6 +44,7 @@ function buildSheetPayload(report: InternalFsiReport): LeadSheetPayload {
     fullName: asText(leadInfo.fullName),
     phone: asText(leadInfo.phone),
     preferredContactTime: asText(leadInfo.preferredContactTime),
+    priorityTopic: asText(leadInfo.priorityTopic),
     note: asText(leadInfo.note),
     consent: Boolean(leadInfo.consent),
     preferredAdvisorId: asText(leadInfo.preferredAdvisorId),
