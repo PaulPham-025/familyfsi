@@ -11,7 +11,24 @@ export const brand = {
   bookingUrl: "#"
 };
 
-export const teamMembers = [
+type TeamMember = {
+  id: string;
+  name: string;
+  role: string;
+  publicLabel: string;
+};
+
+type ArticleContent = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  readTime: string;
+  category: string;
+  fsiCta: string;
+  body: string[];
+};
+
+const teamMembersData = [
   {
     id: "duy-pham",
     name: "Duy Phạm",
@@ -29,8 +46,75 @@ export const teamMembers = [
     name: "Thành viên tư vấn 2",
     role: "Family finance advisor",
     publicLabel: "Một tư vấn viên trong đội ngũ"
+  },
+  {
+    slug: "gia-dinh-minh-dang-o-vung-nao",
+    title: "Gia đình mình đang ở vùng nào?",
+    excerpt:
+      "Một cách đọc kết quả FSI bình tĩnh hơn: điểm số không phải để phán xét, mà để biết gia đình đang mạnh ở đâu và nên ưu tiên điều gì trước.",
+    readTime: "8 phút đọc",
+    category: "FSI",
+    fsiCta:
+      "Nếu anh/chị muốn nhìn lại gia đình mình đang ở vùng nào một cách có hệ thống hơn, bài FSI sẽ là điểm bắt đầu nhẹ nhàng và rõ ràng.",
+    body: [
+      "Có những gia đình thu nhập đều, chi phí vẫn xoay xở được, nhưng trong lòng vẫn có cảm giác chưa thật sự yên tâm. Cũng có những gia đình đang thấy áp lực, nhưng không biết phần nào là vấn đề lớn nhất: dòng tiền, quỹ dự phòng, khoản vay, sức khỏe, học vấn cho con hay nghỉ hưu.",
+      "FSI được tạo ra để giúp gia đình có một chiếc gương soi tổng thể. Điểm số không phải là điểm thi, cũng không phải nhãn dán nói rằng gia đình đang đúng hay sai. Điểm số chỉ giúp anh/chị biết hiện tại mình đang đứng ở vùng nào, từ đó chọn bước tiếp theo hợp lý hơn.",
+      "Vùng Xanh cho thấy nền tảng tài chính tương đối vững vàng. Tuy vậy, Vùng Xanh không có nghĩa là không còn gì cần rà soát. Một gia đình vẫn có thể kiểm soát dòng tiền tốt nhưng chưa chuẩn bị đủ cho chi phí y tế lớn, bảo vệ thu nhập hoặc kế hoạch nghỉ hưu.",
+      "Vùng Vàng thường là nhóm rất phổ biến ở các gia đình trẻ: nhiều thứ đang ổn, nhưng còn vài lớp đệm cần củng cố. Gia đình có thể đã có thu nhập tốt, có thói quen tích lũy, nhưng quỹ dự phòng chưa đủ sâu hoặc các mục tiêu dài hạn vẫn đang dùng chung một nguồn tiền.",
+      "Vùng Cam cho thấy gia đình đã có một số nền tảng, nhưng đang tồn tại nhiều khoảng trống cần được nhìn kỹ hơn. Điều quan trọng là không vội lo lắng. Vùng Cam chỉ nói rằng nếu có một biến động lớn, gia đình có thể dễ bị động hơn mong muốn.",
+      "Vùng Đỏ không phải là lời phán xét. Nhiều gia đình ở vùng này đơn giản là đang gánh nhiều trách nhiệm cùng lúc: con nhỏ, khoản vay, thu nhập chưa ổn định, người phụ thuộc hoặc chưa từng có dịp ngồi xuống nhìn lại bức tranh tài chính một cách có hệ thống.",
+      "Sau khi biết mình ở vùng nào, câu hỏi quan trọng nhất không phải là làm sao để tăng điểm thật nhanh. Câu hỏi quan trọng hơn là: nếu chỉ chọn một đến hai việc trong 30-90 ngày tới, việc nào sẽ giúp gia đình bớt bị động nhất?",
+      "Một số gia đình nên bắt đầu từ việc theo dõi chi tiêu. Một số gia đình nên tách quỹ dự phòng. Một số gia đình cần rà soát bảo vệ thu nhập của người tạo dòng tiền chính. Một số gia đình nên đặt tên lại cho các khoản tiết kiệm đang dùng chung một chỗ.",
+      "Khi đọc FSI bằng tinh thần bình tĩnh, kết quả sẽ bớt giống một con số và giống một bản đồ hơn. Gia đình nhìn thấy điểm mạnh để duy trì, khoảng trống để củng cố, và bước nhỏ phù hợp để bắt đầu."
+    ]
+  },
+  {
+    slug: "tien-cua-gia-dinh-dang-duoc-chia-vai-nhu-the-nao",
+    title: "Tiền của gia đình đang được chia vai như thế nào?",
+    excerpt:
+      "Nhiều gia đình không thiếu cố gắng, chỉ thiếu cách phân vai rõ cho tiền: chi tiêu hiện tại, dự phòng, bảo vệ và các mục tiêu tương lai.",
+    readTime: "9 phút đọc",
+    category: "Dòng tiền",
+    fsiCta:
+      "Nếu muốn biết dòng tiền gia đình đang được chia vai rõ hay vẫn còn dùng chung một túi, anh/chị có thể làm FSI để nhìn lại nhanh hơn.",
+    body: [
+      "Một gia đình có thể có thu nhập tốt nhưng vẫn thấy tiền lúc nào cũng căng. Lý do đôi khi không nằm ở việc chi tiêu quá hoang phí, mà nằm ở chỗ quá nhiều vai trò đang được đặt lên cùng một khoản tiền.",
+      "Tiền lương tháng này vừa phải trả sinh hoạt, vừa trả khoản vay, vừa lo học phí, vừa mua sắm, vừa để dành cho con, vừa nghĩ đến nghỉ hưu, vừa làm quỹ dự phòng. Khi mọi thứ dùng chung một túi, gia đình rất khó biết tiền nào thật sự được dành cho việc gì.",
+      "Một cách nhìn đơn giản là chia tiền thành vài vai chính. Vai thứ nhất là tiền vận hành cuộc sống hiện tại: ăn uống, nhà ở, điện nước, đi lại, học phí, các khoản bắt buộc. Đây là phần giúp gia đình sống ổn mỗi tháng.",
+      "Vai thứ hai là tiền dự phòng. Khoản này không nhằm tạo lợi nhuận cao, mà để gia đình có thời gian xoay xở khi thu nhập gián đoạn, phát sinh y tế hoặc có việc lớn ngoài kế hoạch. Nếu không tách riêng, quỹ dự phòng rất dễ bị dùng nhầm cho chi tiêu thường ngày.",
+      "Vai thứ ba là tiền bảo vệ. Đây là phần giúp gia đình trả lời câu hỏi: nếu người tạo thu nhập chính không thể làm việc trong một thời gian, hoặc nếu có chi phí y tế lớn, gia đình sẽ dùng nguồn nào để duy trì cuộc sống mà không phá vỡ toàn bộ kế hoạch?",
+      "Vai thứ tư là tiền cho mục tiêu tương lai: học vấn cho con, mua nhà, nâng cấp chất lượng sống, đầu tư dài hạn, nghỉ hưu. Các mục tiêu này cần được đặt tên rõ, vì nếu chỉ để chung là “tiền tiết kiệm”, gia đình sẽ khó biết mục tiêu nào đang được chuẩn bị đủ và mục tiêu nào chỉ đang được nghĩ đến.",
+      "Khi tiền có vai rõ, gia đình không nhất thiết phải kiếm thêm thật nhiều mới thấy an tâm hơn. Đôi khi chỉ cần biết 5 triệu này là quỹ dự phòng, 3 triệu kia là học vấn cho con, khoản còn lại là tích lũy dài hạn, cảm giác chủ động đã khác đi rất nhiều.",
+      "Điểm khó là không phải tháng nào cũng chia được hoàn hảo. Có tháng phát sinh, có tháng thu nhập thấp hơn, có tháng phải ưu tiên gia đình hai bên. Điều quan trọng không phải là công thức cứng, mà là gia đình có nguyên tắc để quay lại nhịp đúng sau mỗi lần lệch.",
+      "Nếu hiện tại mọi khoản tiền vẫn đang nằm chung một chỗ, bước đầu tiên có thể rất nhỏ: đặt tên lại cho tiền. Gia đình không cần mở quá nhiều tài khoản ngay, nhưng cần biết khoản nào dùng cho hiện tại, khoản nào bảo vệ gia đình, khoản nào dành cho tương lai."
+    ]
+  },
+  {
+    slug: "sau-khi-lam-fsi-buoc-tiep-theo-la-gi",
+    title: "Sau khi làm FSI, bước tiếp theo là gì?",
+    excerpt:
+      "Kết quả FSI chỉ thật sự có giá trị khi được chuyển thành một hành động nhỏ, cụ thể và vừa sức với gia đình trong giai đoạn hiện tại.",
+    readTime: "8 phút đọc",
+    category: "FSI",
+    fsiCta:
+      "Nếu anh/chị chưa làm FSI, hãy bắt đầu bằng bài kiểm tra ngắn để có một điểm mốc rõ ràng trước khi chọn ưu tiên tiếp theo.",
+    body: [
+      "Sau khi hoàn thành FSI, phản ứng tự nhiên của nhiều người là nhìn ngay vào điểm số. Mình được bao nhiêu điểm? Mình ở Vùng Xanh, Vàng, Cam hay Đỏ? Kết quả này tốt hay chưa tốt?",
+      "Những câu hỏi đó dễ hiểu, nhưng điểm số không phải là phần quan trọng nhất. Điều đáng giá hơn nằm ở câu chuyện tài chính phía sau con số: gia đình đang mạnh ở đâu, lớp đệm nào còn mỏng, và nếu chỉ chọn một đến hai việc để bắt đầu, việc nào nên được ưu tiên trước.",
+      "Bước đầu tiên sau khi làm FSI là ghi nhận điểm mạnh. Có thể gia đình đã kiểm soát chi tiêu tương đối rõ, đã có thu nhập đều, đã duy trì tích lũy, đã có một phần quỹ dự phòng hoặc đã bắt đầu nghĩ đến học vấn cho con. Những điều này là nền để đi tiếp.",
+      "Bước thứ hai là nhìn vào khoảng trống, nhưng không cố sửa mọi thứ cùng lúc. Một gia đình trẻ có thể cùng lúc thấy mình cần tăng quỹ dự phòng, rà soát bảo vệ thu nhập, tách quỹ học vấn, chuẩn bị nghỉ hưu và điều chỉnh chi tiêu. Nếu ôm tất cả cùng lúc, rất dễ quá tải.",
+      "Thứ tự ưu tiên nên được đọc theo bối cảnh. Gia đình có khoản vay lớn và nhiều người phụ thuộc có thể cần ưu tiên dự phòng và bảo vệ thu nhập. Gia đình có con sắp vào giai đoạn học phí cao có thể cần tách nguồn học vấn. Gia đình có dòng tiền còn mơ hồ có thể cần bắt đầu bằng theo dõi chi tiêu 30 ngày.",
+      "Một câu hỏi rất hữu ích là: khoảng trống nào nếu chưa xử lý sẽ khiến gia đình bị động nhất khi có thay đổi lớn? Câu trả lời thường giúp mình chọn đúng điểm bắt đầu hơn là chỉ nhìn vào mục nào có điểm thấp nhất.",
+      "Bước thứ ba là biến kết quả thành một hành động nhỏ. Ví dụ: mở một khoản dự phòng riêng, ghi lại chi tiêu trong 30 ngày, hẹn một buổi trao đổi với vợ/chồng, rà soát các khoản vay, hoặc kiểm tra lại phương án tài chính nếu nguồn thu chính bị gián đoạn.",
+      "Một hành động nhỏ nhưng đúng chỗ thường tốt hơn một kế hoạch rất lớn nhưng không duy trì được. Tài chính gia đình thay đổi nhờ những việc rõ ràng, đều đặn và phù hợp với ngân sách hiện tại.",
+      "FSI không thay thế cho một kế hoạch tài chính chi tiết. Nhưng FSI giúp gia đình có điểm bắt đầu rõ hơn. Khi biết mình đang ở đâu, mình sẽ bớt phải đoán, bớt chạy theo lời khuyên chung chung và dễ chọn bước tiếp theo phù hợp với nhà mình hơn."
+    ]
   }
 ];
+
+export const teamMembers = teamMembersData.filter((member): member is TeamMember => "id" in member);
+
+const promotedArticles = teamMembersData.filter((item): item is ArticleContent => "slug" in item);
 
 export const navigation = [
   { label: "Trang chủ", href: "/" },
@@ -171,7 +255,8 @@ export const articles = [
       "Cha mẹ cũng nên trao đổi với nhau về kỳ vọng giáo dục. Nhiều áp lực tài chính đến từ việc hai vợ chồng không nói rõ mong muốn: học trường nào, mức đầu tư bao nhiêu là vừa, điều gì là ưu tiên thật sự, và điều gì chỉ là áp lực so sánh với người khác.",
       "Bước cuối cùng là rà soát định kỳ. Khi thu nhập, học phí, định hướng giáo dục hoặc số con thay đổi, kế hoạch cũng cần được điều chỉnh. Một kế hoạch tốt không cần hoàn hảo từ đầu, nhưng cần được duy trì và cập nhật."
     ]
-  }
+  },
+  ...promotedArticles
 ];
 
 export const articleLongFormAdditions: Record<string, string[]> = {

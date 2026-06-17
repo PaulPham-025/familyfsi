@@ -9,7 +9,7 @@ export default function ArticlesPage() {
       <PageIntro
         label="Bài viết"
         title="Nội dung dài giúp gia đình trẻ hiểu tài chính theo cách gần gũi hơn."
-        body="Đây là thư viện bài viết nền tảng. Các bài hiện là bản khung để phát triển thành nội dung SEO, email hoặc bài đăng Facebook dài."
+        body="Đây là thư viện nội dung nền tảng của FamilyFSI, giúp anh/chị nhìn rõ dòng tiền, dự phòng, bảo vệ thu nhập và các mục tiêu dài hạn trước khi ra quyết định."
       />
       <section className="mx-auto grid w-full max-w-6xl gap-4 px-4 pb-14 sm:px-6 md:grid-cols-2 lg:px-8">
         {articles.map((article) => (
