@@ -26,17 +26,8 @@ export default function ProcessPage() {
       </section>
       <section className="mx-auto w-full max-w-6xl px-4 pb-14 sm:px-6 lg:px-8">
         <Panel>
-          <h2 className="text-2xl font-bold text-leaf-900">Cách đội ngũ xử lý lead</h2>
-          <div className="mt-5 grid gap-3">
-            {teamWorkflow.map((item, index) => (
-              <div key={item} className="flex gap-3 rounded-[8px] bg-leaf-50 p-4">
-                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-leaf-700 text-sm font-bold text-white">
-                  {index + 1}
-                </span>
-                <p className="leading-7 text-leaf-800">{item}</p>
-              </div>
-            ))}
-          </div>
+          <h2 className="text-2xl font-bold text-leaf-900">Khi anh/chị muốn trao đổi thêm</h2>
+          <p className="mt-4 max-w-4xl leading-8 text-leaf-800">{teamWorkflow[0]}</p>
         </Panel>
       </section>
       <ContactCta />

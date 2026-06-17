@@ -150,10 +150,7 @@ export const processSteps = [
 ];
 
 export const teamWorkflow = [
-  "Lead được ghi nhận cùng nguồn phát sinh: FSI, tài liệu tải về, bài viết hoặc liên hệ trực tiếp.",
-  "Đội ngũ có thể phân công người phụ trách dựa trên quan hệ sẵn có, thời gian tiện liên hệ hoặc năng lực chuyên môn.",
-  "Tư vấn viên được phân công dùng advisor summary để chuẩn bị cuộc gọi đầu tiên.",
-  "Sau cuộc trao đổi, trạng thái lead có thể được cập nhật trong Google Sheets hoặc CRM."
+  "Khi anh/chị có nhu cầu trao đổi thêm, anh/chị có thể chọn “Đặt lịch trao đổi”; thành viên của FamilyFSI sẽ chủ động liên hệ để thống nhất thời gian phù hợp và cùng anh/chị xem kỹ hơn kết quả FSI trong bối cảnh gia đình mình."
 ];
 
 export const platformPositioning = {
