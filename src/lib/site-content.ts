@@ -354,7 +354,8 @@ export const guides = [
     title: "Family Financial Safety Checklist",
     description: "Checklist một trang để gia đình rà soát dòng tiền, dự phòng, bảo vệ và mục tiêu dài hạn.",
     format: "PDF",
-    status: "Bản xem trước",
+    status: "Tải miễn phí",
+    downloadUrl: "/downloads/family-financial-safety-checklist.pdf",
     sections: [
       "Dòng tiền hằng tháng: gia đình có biết rõ tiền đang đi đâu không?",
       "Quỹ dự phòng: hiện đủ duy trì bao nhiêu tháng chi phí thiết yếu?",
